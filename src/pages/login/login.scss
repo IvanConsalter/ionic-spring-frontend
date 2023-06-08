@@ -1,0 +1,21 @@
+page-login {
+
+  .logo {
+    display: flex;
+    justify-content: center;
+
+    & svg {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  form {
+    margin-top: 2rem;
+
+    .buttons {
+      margin-top: 4rem;
+    }
+  }
+
+}
