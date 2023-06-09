@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, MenuController, NavController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,11 +8,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    private menuController: MenuController
+  ) { }
+
+  ionViewWillEnter() {
+    this.menuController.swipeEnable(false);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  ionViewDidLeave() {
+    this.menuController.swipeEnable(true);
+  }
+
+  login() {
+    this.navCtrl.setRoot('HomePage');
   }
 
 }
