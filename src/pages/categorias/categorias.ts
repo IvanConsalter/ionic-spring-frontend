@@ -1,6 +1,7 @@
 import { CategoriaService } from './../../app/services/categoria.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ICategoria } from '../../app/models/categoria.model';
 
 @IonicPage()
 @Component({
@@ -8,6 +9,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'categorias.html',
 })
 export class CategoriasPage {
+
+  arrayCategoria: Array<ICategoria> = [];
 
   constructor(
     public navCtrl: NavController,
@@ -23,7 +26,7 @@ export class CategoriasPage {
   findAll(): void {
     this.categoriaService.findAll().subscribe(
       (res) => {
-        console.log(res);
+        this.arrayCategoria = res;
       },
       (error) => {
         console.error(error);
