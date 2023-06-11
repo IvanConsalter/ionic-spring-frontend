@@ -1,3 +1,4 @@
+import { AuthService } from './../../app/services/auth.service';
 import { Component } from '@angular/core';
 import { IonicPage, MenuController, NavController } from 'ionic-angular';
 import { User } from '../../app/models/user.model';
@@ -14,9 +15,10 @@ export class LoginPage {
   userForm: FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
     public navCtrl: NavController,
+    private authService: AuthService,
     private menuController: MenuController,
-    private formBuilder: FormBuilder
   ) {
     this.userForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -34,9 +36,13 @@ export class LoginPage {
 
   login() {
     this.user = { ...this.userForm.value };
-    console.log(this.user);
+    this.authService.authenticate(this.user).subscribe(
+      (res) => {
+        console.log(res.headers.get('Authorization'));
 
-    this.navCtrl.setRoot('HomePage');
+        this.navCtrl.setRoot('HomePage');
+      },
+      (error) => {});
   }
 
 }
