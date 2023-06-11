@@ -38,8 +38,7 @@ export class LoginPage {
     this.user = { ...this.userForm.value };
     this.authService.authenticate(this.user).subscribe(
       (res) => {
-        console.log(res.headers.get('Authorization'));
-
+        this.authService.sucessLogin(res.headers.get('Authorization'));
         this.navCtrl.setRoot('HomePage');
       },
       (error) => {});
