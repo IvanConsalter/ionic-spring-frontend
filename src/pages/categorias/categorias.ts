@@ -28,10 +28,7 @@ export class CategoriasPage {
       (res) => {
         this.arrayCategoria = res;
       },
-      (error) => {
-        console.error(error);
-      }
-    );
+      (error) => {});
   }
 
 }
