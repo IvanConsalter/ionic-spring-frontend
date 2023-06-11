@@ -46,14 +46,14 @@
     </svg>
   </div>
 
-  <form>
+  <form [formGroup]="userForm">
     <ion-item>
       <ion-label stacked>Email</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Senha</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" formControlName="senha"></ion-input>
     </ion-item>
 
     <div class="buttons">
