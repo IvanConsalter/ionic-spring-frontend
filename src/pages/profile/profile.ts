@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { StorageService } from "../../app/services/storage.service";
+import { ICliente } from "../../app/models/cliente.model";
+import { ClienteService } from "../../app/services/cliente.service";
 
 @IonicPage()
 @Component({
@@ -9,18 +11,24 @@ import { StorageService } from "../../app/services/storage.service";
 })
 export class ProfilePage {
 
-  email: string;
+  cliente: ICliente;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public storageService: StorageService
+    public storageService: StorageService,
+    private clienteService: ClienteService
   ) {}
 
   ionViewDidLoad() {
     let localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
-      this.email = localUser.email;
+      this.clienteService.findByEmail(localUser.email)
+        .subscribe(response => {
+          this.cliente = response;
+        },
+        error => {});
     }
   }
+
 }
