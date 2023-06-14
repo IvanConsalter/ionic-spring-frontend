@@ -1,3 +1,4 @@
+import { StorageService } from './../app/services/storage.service';
 import {
   HTTP_INTERCEPTORS,
   HttpEvent,
@@ -11,6 +12,9 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+
+  constructor(private storageService: StorageService) { }
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -27,9 +31,20 @@ export class ErrorInterceptor implements HttpInterceptor {
       console.log("Erro detectado pelo interceptor:");
       console.log(errorObj);
 
+      switch(errorObj.status) {
+        case 403:
+          this.handle403();
+          break;
+      }
+
       return Observable.throw(errorObj);
     }) as any;
   }
+
+  handle403() {
+    this.storageService.setLocalUser(null);
+  }
+
 }
 
 export const ErrorInterceptorProvider = {

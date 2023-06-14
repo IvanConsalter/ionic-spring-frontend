@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { StorageService } from "../../app/services/storage.service";
 import { ICliente } from "../../app/models/cliente.model";
 import { ClienteService } from "../../app/services/cliente.service";
+import { Pages } from "../../app/shared/enum/pages.enum";
 
 @IonicPage()
 @Component({
@@ -27,7 +28,13 @@ export class ProfilePage {
         .subscribe(response => {
           this.cliente = response;
         },
-        error => {});
+        error => {
+          if(error.status === 403) {
+            this.navCtrl.setRoot(Pages.LOGINPAGE);
+          }
+        });
+    } else {
+      this.navCtrl.setRoot(Pages.LOGINPAGE);
     }
   }
 
