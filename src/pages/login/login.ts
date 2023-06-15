@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, MenuController, NavController } from 'ionic-angular';
 import { User } from '../../app/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Pages } from '../../app/shared/enum/pages.enum';
 
 @IonicPage()
 @Component({
@@ -38,7 +39,7 @@ export class LoginPage {
     this.authService.refreshToken().subscribe(
       (res) => {
         this.authService.sucessLogin(res.headers.get('Authorization'));
-        this.navCtrl.setRoot('HomePage');
+        this.navCtrl.setRoot(Pages.HOMEPAGE);
       },
       (error) => {});
   }
@@ -48,9 +49,13 @@ export class LoginPage {
     this.authService.authenticate(this.user).subscribe(
       (res) => {
         this.authService.sucessLogin(res.headers.get('Authorization'));
-        this.navCtrl.setRoot('HomePage');
+        this.navCtrl.setRoot(Pages.HOMEPAGE);
       },
       (error) => {});
+  }
+
+  signup() {
+    this.navCtrl.push(Pages.SIGNUP);
   }
 
 }
