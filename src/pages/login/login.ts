@@ -34,6 +34,15 @@ export class LoginPage {
     this.menuController.swipeEnable(true);
   }
 
+  ionViewDidEnter() {
+    this.authService.refreshToken().subscribe(
+      (res) => {
+        this.authService.sucessLogin(res.headers.get('Authorization'));
+        this.navCtrl.setRoot('HomePage');
+      },
+      (error) => {});
+  }
+
   login() {
     this.user = { ...this.userForm.value };
     this.authService.authenticate(this.user).subscribe(
