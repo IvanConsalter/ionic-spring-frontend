@@ -1,3 +1,4 @@
+import { EstadoService } from './../../app/services/estado.service';
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
@@ -6,6 +7,8 @@ import {
   NavController,
   NavParams,
 } from "ionic-angular";
+import { IEstado } from "../../app/models/estado.model";
+import { ICidade } from "../../app/models/cidade.model";
 
 @IonicPage()
 @Component({
@@ -15,10 +18,14 @@ import {
 export class SignupPage {
   SignupForm: FormGroup;
 
+  arrayEstado: Array<IEstado> = [];
+  arrayCidade: Array<ICidade> = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
+    public estadoService: EstadoService,
     private menuController: MenuController
   ) {
     this.SignupForm = this.formBuilder.group({
@@ -59,12 +66,38 @@ export class SignupPage {
   }
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad SignupPage");
+    this.carregarArrayEstado();
+
   }
 
   signupUser() {
     console.log("enviou o form");
   }
 
-  updateCidades() {}
+  carregarArrayEstado(): void {
+    this.estadoService.findAll().subscribe(
+      (res) => {
+        console.log(res);
+
+        this.arrayEstado = res;
+        this.carregarArrayCidade(this.arrayEstado[0].id);
+      },
+      (error) => {}
+    )
+  }
+
+  carregarArrayCidade(estadoId: number): void {
+    this.estadoService.findCidadeByEstado(estadoId).subscribe(
+      (res) => {
+        console.log(res);
+
+        this.arrayCidade = res;
+      },
+      (error) => {}
+    )
+  }
+
+  updateCidades(estadoId: any): void {
+    this.carregarArrayCidade(estadoId);
+  }
 }

@@ -13,6 +13,7 @@ import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { ClienteService } from './services/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
+import { EstadoService } from './services/estado.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     StatusBar,
     SplashScreen,
     AuthService,
+    EstadoService,
     StorageService,
     ClienteService,
     CategoriaService,
