@@ -23,6 +23,10 @@ p, button, button span, .label, .font-text {
   font-family: $font-texto;
 }
 
+p.danger {
+  color: map-get($colors, danger);
+  margin-left: 2rem;
+}
 
 
 

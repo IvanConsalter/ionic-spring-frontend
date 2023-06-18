@@ -6,17 +6,21 @@
 
 <ion-content padding>
   <form
-    [formGroup]="SignupForm"
+    [formGroup]="signupForm"
     (ngSubmit)="signupUser(); $event.preventDefault()"
   >
     <ion-item>
       <ion-label stacked>Nome*</ion-label>
       <ion-input formControlName="nome" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.nome"></error-messages>
+
     <ion-item>
       <ion-label stacked>Email*</ion-label>
       <ion-input formControlName="email" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.email"></error-messages>
+
     <ion-list radio-group formControlName="tipo">
       <ion-list-header> Tipo de cliente </ion-list-header>
       <ion-item>
@@ -33,34 +37,50 @@
       <ion-label stacked>CPF ou CNPJ</ion-label>
       <ion-input formControlName="cpfOuCnpj" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.cpfOuCnpj"></error-messages>
+
     <ion-item>
       <ion-label stacked>Senha*</ion-label>
       <ion-input formControlName="senha" type="password"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.senha"></error-messages>
+
     <ion-item>
       <ion-label stacked>Logradouro*</ion-label>
       <ion-input formControlName="logradouro" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.logradouro"></error-messages>
+
     <ion-item>
       <ion-label stacked>Número*</ion-label>
       <ion-input formControlName="numero" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.numero"></error-messages>
+
     <ion-item>
       <ion-label stacked>Complemento</ion-label>
       <ion-input formControlName="complemento" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.complemento"></error-messages>
+
     <ion-item>
       <ion-label stacked>Bairro</ion-label>
       <ion-input formControlName="bairro" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.bairro"></error-messages>
+
     <ion-item>
       <ion-label stacked>CEP*</ion-label>
       <ion-input formControlName="cep" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.cep"></error-messages>
+
     <ion-item>
       <ion-label stacked>Telefone 1*</ion-label>
       <ion-input formControlName="telefone1" type="text"></ion-input>
     </ion-item>
+    <error-messages [field]="signupForm.controls.telefone1"></error-messages>
+
     <ion-item>
       <ion-label stacked>Telefone 2</ion-label>
       <ion-input formControlName="telefone2" type="text"></ion-input>

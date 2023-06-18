@@ -14,6 +14,7 @@ import { StorageService } from './services/storage.service';
 import { ClienteService } from './services/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { EstadoService } from './services/estado.service';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EstadoService } from './services/estado.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

@@ -16,7 +16,7 @@ import { ICidade } from "../../app/models/cidade.model";
   templateUrl: "signup.html",
 })
 export class SignupPage {
-  SignupForm: FormGroup;
+  signupForm: FormGroup;
 
   arrayEstado: Array<IEstado> = [];
   arrayCidade: Array<ICidade> = [];
@@ -28,7 +28,7 @@ export class SignupPage {
     public estadoService: EstadoService,
     private menuController: MenuController
   ) {
-    this.SignupForm = this.formBuilder.group({
+    this.signupForm = this.formBuilder.group({
       nome: [
         "Joaquim",
         [
