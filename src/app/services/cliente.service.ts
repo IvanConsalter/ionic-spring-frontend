@@ -1,4 +1,3 @@
-import { StorageService } from './storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -16,5 +15,16 @@ export class ClienteService {
 
   findByEmail(email: string) : Observable<ICliente> {
     return this.http.get<ICliente>(`${this.clienteBaseUrl}/email?email=${email}`);
-}
+  }
+
+  insert(cliente: ICliente) {
+    return this.http.post(
+        `${this.clienteBaseUrl}`, cliente,
+        {
+          observe: 'response',
+          responseType: 'text'
+        }
+    );
+  }
+
 }

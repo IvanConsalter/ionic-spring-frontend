@@ -2,6 +2,7 @@ import { EstadoService } from './../../app/services/estado.service';
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {
+  AlertController,
   IonicPage,
   MenuController,
   NavController,
@@ -9,6 +10,8 @@ import {
 } from "ionic-angular";
 import { IEstado } from "../../app/models/estado.model";
 import { ICidade } from "../../app/models/cidade.model";
+import { ClienteService } from '../../app/services/cliente.service';
+import { Pages } from '../../app/shared/enum/pages.enum';
 
 @IonicPage()
 @Component({
@@ -25,7 +28,9 @@ export class SignupPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
+    private alertCtrl: AlertController,
     public estadoService: EstadoService,
+    public clienteService: ClienteService,
     private menuController: MenuController
   ) {
     this.signupForm = this.formBuilder.group({
@@ -71,7 +76,28 @@ export class SignupPage {
   }
 
   signupUser() {
-    console.log("enviou o form");
+    this.clienteService.insert(this.signupForm.value)
+      .subscribe(response => {
+        this.showInsertOk();
+      },
+      error => {});
+  }
+
+  showInsertOk() {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.setRoot(Pages.LOGINPAGE);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   carregarArrayEstado(): void {
