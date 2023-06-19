@@ -32,8 +32,8 @@ export class CategoriasPage {
       (error) => {});
   }
 
-  showProdutos() {
-    this.navCtrl.push(Pages.PRODUTOS);
+  showProdutos(categoriaId: number) {
+    this.navCtrl.push(Pages.PRODUTOS, { categoriaId: categoriaId });
   }
 
 }

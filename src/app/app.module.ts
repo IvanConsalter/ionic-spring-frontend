@@ -15,6 +15,7 @@ import { ClienteService } from './services/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { EstadoService } from './services/estado.service';
 import { ComponentsModule } from '../components/components.module';
+import { ProdutoService } from './services/produto.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ComponentsModule } from '../components/components.module';
     EstadoService,
     StorageService,
     ClienteService,
+    ProdutoService,
     CategoriaService,
 
     AuthInterceptorProvider,
