@@ -3,4 +3,5 @@ export enum Pages {
   LOGINPAGE = 'LoginPage',
   PROFILEPAGE = 'ProfilePage',
   SIGNUP = 'SignupPage',
+  PRODUTOS = 'ProdutosPage',
 }
