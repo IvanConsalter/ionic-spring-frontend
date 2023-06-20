@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { IProduto } from "../../app/models/produto.model";
 import { ProdutoService } from "../../app/services/produto.service";
+import { Pages } from "../../app/shared/enum/pages.enum";
 
 @IonicPage()
 @Component({
@@ -25,5 +26,9 @@ export class ProdutosPage {
       },
       (error) => {}
     );
+  }
+
+  showDetail() {
+    this.navCtrl.push(Pages.PRODUTO_DETAIL);
   }
 }
