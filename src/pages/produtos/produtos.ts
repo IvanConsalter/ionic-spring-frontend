@@ -28,7 +28,7 @@ export class ProdutosPage {
     );
   }
 
-  showDetail() {
-    this.navCtrl.push(Pages.PRODUTO_DETAIL);
+  showDetail(produtoId: number) {
+    this.navCtrl.push(Pages.PRODUTO_DETAIL, { produtoId: produtoId });
   }
 }
