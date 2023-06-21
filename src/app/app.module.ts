@@ -16,6 +16,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { EstadoService } from './services/estado.service';
 import { ComponentsModule } from '../components/components.module';
 import { ProdutoService } from './services/produto.service';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ProdutoService } from './services/produto.service';
     StatusBar,
     SplashScreen,
     AuthService,
+    CartService,
     EstadoService,
     StorageService,
     ClienteService,

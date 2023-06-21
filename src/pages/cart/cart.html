@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>cart</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let cartItem of arrayCartItems">
+      <ion-thumbnail item-start>
+        <img [src]="cartItem.produto.imageUrl || 'assets/imgs/produto.jpg'">
+      </ion-thumbnail>
+      <h2>{{ cartItem.produto.nome }}</h2>
+      <p>{{ cartItem.produto.preco | currency:'BRL' }}</p>
+      <p>{{ cartItem.quantidade }}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

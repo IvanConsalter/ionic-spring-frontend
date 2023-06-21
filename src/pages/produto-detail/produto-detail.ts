@@ -2,6 +2,8 @@ import { ProdutoService } from './../../app/services/produto.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IProduto } from '../../app/models/produto.model';
+import { Pages } from '../../app/shared/enum/pages.enum';
+import { CartService } from '../../app/services/cart.service';
 
 @IonicPage()
 @Component({
@@ -13,8 +15,9 @@ export class ProdutoDetailPage {
   produto: IProduto;
 
   constructor(
-    public navCtrl: NavController,
     public navParams: NavParams,
+    public navCtrl: NavController,
+    private cartService: CartService,
     private produtoService: ProdutoService
   ) {
   }
@@ -27,6 +30,11 @@ export class ProdutoDetailPage {
       },
       (error) => {}
     )
+  }
+
+  addToCart(produto: IProduto) {
+    this.cartService.addProduto(produto);
+    this.navCtrl.push(Pages.CART);
   }
 
 }
