@@ -5,11 +5,13 @@ import { User } from "../models/user.model";
 import { environment } from "../environments/environment";
 import { ILocalUser } from "../models/local-user.model";
 import jwt from "jsonwebtoken";
+import { CartService } from "./cart.service";
 
 @Injectable()
 export class AuthService {
   constructor(
     private http: HttpClient,
+    private cartService: CartService,
     private storageService: StorageService
   ) {}
 
@@ -41,6 +43,7 @@ export class AuthService {
     };
 
     this.storageService.setLocalUser(user);
+    this.cartService.createOrClearCart();
   }
 
   logout() {
