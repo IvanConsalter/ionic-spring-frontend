@@ -47,4 +47,8 @@ export class CartPage {
     this.navCtrl.setRoot(Pages.CATEGORIAS);
   }
 
+  checkout() {
+    this.navCtrl.push(Pages.PICKADDRESS);
+  }
+
 }
