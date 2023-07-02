@@ -6,6 +6,8 @@ import { IEndereco } from '../../app/models/endereco.model';
 import { IUser } from '../../app/models/user.model';
 import { ILocalUser } from '../../app/models/local-user.model';
 import { Pages } from '../../app/shared/enum/pages.enum';
+import { IPedido } from '../../app/models/pedido.model';
+import { CartService } from '../../app/services/cart.service';
 
 @IonicPage()
 @Component({
@@ -15,10 +17,12 @@ import { Pages } from '../../app/shared/enum/pages.enum';
 export class PickAddressPage {
 
   arrayEnderecos: Array<IEndereco>;
+  pedido: IPedido;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private cartService: CartService,
     private storageService: StorageService,
     private clienteService: ClienteService
   ) { }
@@ -36,7 +40,19 @@ export class PickAddressPage {
   carregarEnderecos(user: ILocalUser): void {
     this.clienteService.findByEmail(user.email).subscribe(
       (res) => {
-        this.arrayEnderecos = res.enderecos
+        this.arrayEnderecos = res.enderecos;
+        let cart = this.cartService.getCart();
+
+        console.log(cart);
+
+        this.pedido = {
+          clienteId: res.id,
+          enderecoDeEntregaId: null,
+          pagamento: null,
+          itens: cart.items.map( (item) => {
+            return { quantidade: item.quantidade, produtoId: item.produto.id }
+          })
+        }
       },
       (error) => {
         if (error.status == 403) {
@@ -44,6 +60,11 @@ export class PickAddressPage {
         }
       }
     );
+  }
+
+  nextPage(endereco: IEndereco) {
+    this.pedido.enderecoDeEntregaId = endereco.id;
+    console.log(this.pedido);
   }
 
 }
