@@ -17,6 +17,7 @@ import { EstadoService } from './services/estado.service';
 import { ComponentsModule } from '../components/components.module';
 import { ProdutoService } from './services/produto.service';
 import { CartService } from './services/cart.service';
+import { PedidoService } from './services/pedido.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CartService } from './services/cart.service';
     ClienteService,
     ProdutoService,
     CategoriaService,
+    PedidoService,
 
     AuthInterceptorProvider,
     ErrorInterceptorProvider,

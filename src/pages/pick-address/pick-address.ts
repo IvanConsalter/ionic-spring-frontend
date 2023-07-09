@@ -46,11 +46,11 @@ export class PickAddressPage {
         console.log(cart);
 
         this.pedido = {
-          clienteId: res.id,
-          enderecoDeEntregaId: null,
+          cliente: { id: res.id },
+          enderecoDeEntrega: null,
           pagamento: null,
           itens: cart.items.map( (item) => {
-            return { quantidade: item.quantidade, produtoId: item.produto.id }
+            return { quantidade: item.quantidade, produto: { id: item.produto.id } }
           })
         }
       },
@@ -63,7 +63,7 @@ export class PickAddressPage {
   }
 
   nextPage(endereco: IEndereco) {
-    this.pedido.enderecoDeEntregaId = endereco.id;
+    this.pedido.enderecoDeEntrega = { id: endereco.id };
     this.navCtrl.push(Pages.PAYMENTPAGE, { pedido: this.pedido });
   }
 
