@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IPedido } from '../../app/models/pedido.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Pages } from '../../app/shared/enum/pages.enum';
 
 @IonicPage()
 @Component({
@@ -21,11 +22,11 @@ export class PaymentPage {
     public navParams: NavParams,
     private formBuilder: FormBuilder
   ) {
+    this.pedido = this.navParams.get('pedido');
     this.configurarPaymentForm();
   }
 
   ionViewDidLoad() {
-    this.pedido = this.navParams.get('pedido');
   }
 
   configurarPaymentForm(): void {
@@ -37,7 +38,7 @@ export class PaymentPage {
 
   nextPage() {
     this.pedido.pagamento = this.paymentForm.value;
-    console.log(this.pedido);
+    this.navCtrl.setRoot(Pages.ORDERCONFIRMATIONPAGE, { pedido: this.pedido });
   }
 
 }

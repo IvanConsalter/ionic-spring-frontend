@@ -17,6 +17,10 @@ export class ClienteService {
     return this.http.get<ICliente>(`${this.clienteBaseUrl}/email?email=${email}`);
   }
 
+  findById(id: number): Observable<ICliente> {
+    return this.http.get<ICliente>(`${this.clienteBaseUrl}/${id}`);
+  }
+
   insert(cliente: ICliente) {
     return this.http.post(
         `${this.clienteBaseUrl}`, cliente,
