@@ -8,4 +8,5 @@ export enum Pages {
   PRODUTO_DETAIL = 'ProdutoDetailPage',
   CART = 'CartPage',
   PICKADDRESS = 'PickAddressPage',
+  PAYMENTPAGE = 'PaymentPage',
 }
