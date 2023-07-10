@@ -20,6 +20,7 @@ export class OrderConfirmationPage {
   arrayCartItems: Array<ICartItem> = [];
   cliente: ICliente;
   endereco: IEndereco;
+  codigoPedido: string;
 
   constructor(
     public navCtrl: NavController,
@@ -42,7 +43,7 @@ export class OrderConfirmationPage {
         this.endereco = this.findEndereco(this.pedido.enderecoDeEntrega.id, res['enderecos']);
       },
       error => {
-        this.navCtrl.setRoot('HomePage');
+        this.navCtrl.setRoot(Pages.HOMEPAGE);
       });
   }
 
@@ -54,10 +55,17 @@ export class OrderConfirmationPage {
     this.navCtrl.setRoot(Pages.CART);
   }
 
+  home() {
+    this.navCtrl.setRoot(Pages.HOMEPAGE);
+  }
+
   checkout() {
     this.pedidoService.insert(this.pedido)
-      .subscribe(() => {
+      .subscribe((res) => {
         this.cartService.createOrClearCart();
+        this.codigoPedido = this.extractId(res.headers.get('location'));
+        console.log(this.codigoPedido);
+
       },
       error => {
         if (error.status == 403) {
@@ -71,5 +79,8 @@ export class OrderConfirmationPage {
     return arrayEndereco[position];
   }
 
+  private extractId(location : string): string {
+    return location.split('/').pop();
+  }
 
 }
